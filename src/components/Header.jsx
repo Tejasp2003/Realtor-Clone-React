@@ -35,7 +35,7 @@ function Header() {
               <Link to={"/"}> Home </Link>
             </li>
             <li
-              className={`py-3 text-sm font-semibold text-gray-400 border-b-[6px] border-b-transparent cursor-pointer ${
+              className={`py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent cursor-pointer ${
                 checkActiveRoute("/Offers") && "text-black border-b-red-500"
               }`}
             >
