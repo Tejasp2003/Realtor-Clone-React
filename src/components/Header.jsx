@@ -1,16 +1,32 @@
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 
 function Header() {
   const location = useLocation();
   const navigate = useNavigate();
+  const auth = getAuth();
+  const [pageState, setPageState] = useState("Sign in");
 
   function checkActiveRoute(route) {
     if (location.pathname === route) {
       return true;
     }
   }
+
+  useEffect(()=>{
+    onAuthStateChanged(auth, (user)=>{
+      if(user)
+      {
+        setPageState("Profile");
+      }else{
+        setPageState("Sign in")
+      }
+    })
+  })
 
   return (
     <div className="bg-white border-b shadow-sm sticky top-0 z-50">
@@ -43,10 +59,10 @@ function Header() {
             </li>
             <li
               className={`py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent cursor-pointer ${
-                checkActiveRoute("/Signin") && "text-black border-b-red-500"
+                (checkActiveRoute("/Signin") || checkActiveRoute("/Profile")) && "text-black border-b-red-500"
               }`}
             >
-              <Link to={"/Signin"}> Sign in </Link>
+              <Link to={"/Profile"}> {pageState} </Link>
             </li>
           </ul>
         </div>
