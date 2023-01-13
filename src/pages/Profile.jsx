@@ -1,10 +1,11 @@
 import { getAuth, updateProfile } from "firebase/auth";
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { db } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
+import {AiOutlineHome} from "react-icons/ai"
 
 
 function Profile() {
@@ -58,6 +59,7 @@ function Profile() {
     <>
       <section className="max-w-6xl mx-auto flex justify-center items-center flex-col">
         <h1 className="text-3xl text-center mt-6 font-bold">My Profile</h1>
+        <div className="w-full md:w-[50%] mt-6 px-3">
         <form>
           {/* Name Input */}
 
@@ -104,7 +106,14 @@ function Profile() {
               </p>
             </div>
         </form>
-   
+        <button type="submit" className="w-full bg-blue-600 text-white uppercase px-7 py-2 text-sm font-medium rounded shadow-md hover:bg-blue-700 transition duration-150 ease-in-out hover:shadow-lg active:bg-blue-800">
+          <Link to="/Createlisting" className="flex justify-center items-center">
+          <AiOutlineHome className="mr-2 text-3xl bg-red-200 rounded-full p-1 border-2 text-black"/>
+          Sell or Rent your home
+          </Link>
+          
+        </button>
+   </div>
       </section>
     </>
   );
